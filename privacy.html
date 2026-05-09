@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy — Animal Puzzle Fun World</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sky-top: #87ceeb;
+            --sky-mid: #b8e8f5;
+            --grass: #7ecf6b;
+            --grass-dark: #5cb85c;
+            --sun: #ffd54f;
+            --coral: #ff8a65;
+            --lavender: #ce93d8;
+            --cream: #fffef5;
+            --text: #2d3436;
+            --text-soft: #546e7a;
+            --card-shadow: 0 12px 40px rgba(46, 125, 50, 0.15);
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 213, 79, 0.35), transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(126, 207, 107, 0.45), transparent 45%),
+                radial-gradient(circle at 92% 85%, rgba(206, 147, 216, 0.25), transparent 40%),
+                linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, #d4f4dd 100%);
+            padding: 28px 16px 56px;
+        }
+
+        .wrap {
+            width: min(780px, 100%);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner {
+            background: var(--cream);
+            border-radius: 28px;
+            border: 4px solid rgba(255, 255, 255, 0.95);
+            box-shadow: var(--card-shadow);
+            padding: clamp(22px, 3.5vw, 36px);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--lavender), #ab47bc);
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(1.55rem, 4.4vw, 2.35rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        .intro {
+            margin-top: 14px;
+            color: var(--text-soft);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.75;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        section.panel {
+            border-radius: 22px;
+            background: linear-gradient(145deg, #fff 0%, #f1f8e9 100%);
+            border: 3px solid rgba(126, 207, 107, 0.45);
+            padding: 18px 20px;
+            box-shadow: 0 6px 0 rgba(92, 184, 92, 0.2);
+        }
+
+        section.panel h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--grass-dark);
+            margin-bottom: 10px;
+        }
+
+        section.panel p {
+            color: var(--text-soft);
+            font-size: 0.96rem;
+            font-weight: 600;
+            line-height: 1.72;
+        }
+
+        section.panel ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: var(--text-soft);
+            font-weight: 600;
+            font-size: 0.96rem;
+            line-height: 1.65;
+        }
+
+        .highlight-box {
+            margin-top: 8px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255, 213, 79, 0.35), rgba(255, 138, 101, 0.2));
+            border: 2px solid rgba(255, 179, 0, 0.45);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .store-note {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px dashed rgba(84, 110, 122, 0.35);
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            line-height: 1.65;
+        }
+
+        .back {
+            margin-top: 22px;
+            text-align: center;
+        }
+
+        .back a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Fredoka', sans-serif;
+            text-decoration: none;
+            color: var(--grass-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: #fff;
+            border: 3px solid var(--grass);
+            box-shadow: 0 4px 0 var(--grass-dark);
+        }
+
+        .back a:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <header class="banner">
+            <span class="badge">Privacy at a glance</span>
+            <h1>Animal Puzzle Fun World</h1>
+            <p class="intro">
+                This page summarizes how privacy works for the Animal Puzzle Fun World app on Apple devices. It is written for families and casual players and avoids unnecessary technical jargon.
+            </p>
+        </header>
+
+        <div class="sections">
+            <section class="panel" aria-labelledby="s1">
+                <h2 id="s1">What this notice covers</h2>
+                <p>
+                    This notice applies to the Animal Puzzle Fun World mobile application obtained through the Apple App Store. It describes our approach to personal information in plain language and complements Apple’s own privacy labels shown on the store listing for your installed version.
+                </p>
+            </section>
+
+            <section class="panel" aria-labelledby="s2">
+                <h2 id="s2">Collection of personal data</h2>
+                <p>
+                    Animal Puzzle Fun World is built so that we do not collect personal data from you through the app for our own use. We do not ask you to create an in-app account for basic puzzle play, and we do not use this app to gather names, email addresses, or similar identifiers from players.
+                </p>
+                <div class="highlight-box">
+                    Summary: the experience is designed around offline-friendly puzzle fun without pulling personal information into our systems through the app.
+                </div>
+            </section>
+
+            <section class="panel" aria-labelledby="s3">
+                <h2 id="s3">Information on your device</h2>
+                <p>
+                    Like many puzzle games, some preferences or progress may be stored only on your device so the app can remember your session. That local information stays under your device controls unless you remove the app or clear app data using system settings.
+                </p>
+            </section>
+
+            <section class="panel" aria-labelledby="s4">
+                <h2 id="s4">Apple &amp; the App Store</h2>
+                <p>
+                    Downloading, updating, and billing are handled by Apple. Apple may process certain technical and account-related information according to its own policies and your device settings. You can review privacy controls in iOS or iPadOS Settings and on your Apple ID account page.
+                </p>
+            </section>
+
+            <section class="panel" aria-labelledby="s5">
+                <h2 id="s5">Younger players</h2>
+                <p>
+                    The app is rated for broad audiences. Parents and guardians should use Apple’s parental controls and Screen Time features if they want to manage installs, purchases, or play time for children using a shared device.
+                </p>
+            </section>
+
+            <section class="panel" aria-labelledby="s6">
+                <h2 id="s6">Updates to this summary</h2>
+                <p>
+                    If features or platform rules change in a way that affects privacy, we may revise this page. The version shown here reflects our current intended practices for Animal Puzzle Fun World; always compare with the App Store privacy details for the exact build on your device.
+                </p>
+            </section>
+        </div>
+
+        <p class="store-note">
+            For the official App Store summary of data practices and the latest app information, open Animal Puzzle Fun World on the App Store on your device or visit the public listing through your browser.
+        </p>
+
+        <p class="back"><a href="index.html">Back to the game page</a></p>
+    </main>
+</body>
+</html>

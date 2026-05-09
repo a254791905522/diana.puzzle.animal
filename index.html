@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Puzzle Fun World</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sky-top: #87ceeb;
+            --sky-mid: #b8e8f5;
+            --grass: #7ecf6b;
+            --grass-dark: #5cb85c;
+            --sun: #ffd54f;
+            --coral: #ff8a65;
+            --lavender: #ce93d8;
+            --cream: #fffef5;
+            --text: #2d3436;
+            --text-soft: #546e7a;
+            --card-shadow: 0 12px 40px rgba(46, 125, 50, 0.15);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 0.55; }
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 213, 79, 0.35), transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(126, 207, 107, 0.45), transparent 45%),
+                radial-gradient(circle at 92% 85%, rgba(206, 147, 216, 0.25), transparent 40%),
+                linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, #d4f4dd 100%);
+            padding: 28px 16px 56px;
+        }
+
+        .clouds {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: inherit;
+        }
+
+        .cloud.a {
+            width: 120px;
+            height: 40px;
+            top: 8%;
+            left: 5%;
+            animation-delay: -1s;
+        }
+
+        .cloud.a::before {
+            width: 50px;
+            height: 50px;
+            top: -22px;
+            left: 18px;
+        }
+
+        .cloud.a::after {
+            width: 65px;
+            height: 45px;
+            top: -18px;
+            right: 12px;
+        }
+
+        .cloud.b {
+            width: 90px;
+            height: 32px;
+            top: 14%;
+            right: 8%;
+            opacity: 0.9;
+            animation-delay: -3s;
+        }
+
+        .cloud.b::before {
+            width: 42px;
+            height: 42px;
+            top: -18px;
+            left: 14px;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            width: min(920px, 100%);
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: var(--cream);
+            border-radius: 28px;
+            border: 4px solid rgba(255, 255, 255, 0.95);
+            box-shadow: var(--card-shadow);
+            padding: clamp(24px, 4vw, 40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 138, 101, 0.08), transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(206, 147, 216, 0.1), transparent 30%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--grass), var(--grass-dark));
+            color: #fff;
+            box-shadow: 0 4px 0 rgba(46, 125, 50, 0.35);
+        }
+
+        .pill.alt {
+            background: linear-gradient(135deg, var(--coral), #ff7043);
+            box-shadow: 0 4px 0 rgba(216, 67, 21, 0.35);
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text);
+            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .accent {
+            color: var(--grass-dark);
+            display: inline-block;
+        }
+
+        .lead {
+            margin-top: 16px;
+            max-width: 720px;
+            color: var(--text-soft);
+            font-size: clamp(1.02rem, 2.2vw, 1.15rem);
+            line-height: 1.75;
+            font-weight: 600;
+        }
+
+        .cta {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 16px;
+            padding: 14px 24px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            background: linear-gradient(180deg, var(--sun) 0%, #ffb300 100%);
+            color: #4e342e;
+            box-shadow: 0 6px 0 #f57f17, 0 10px 24px rgba(245, 127, 23, 0.35);
+        }
+
+        .btn.secondary {
+            background: #fff;
+            color: var(--grass-dark);
+            border: 3px solid var(--grass);
+            box-shadow: 0 4px 0 var(--grass-dark);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 8px 0 #f57f17, 0 14px 28px rgba(245, 127, 23, 0.4);
+        }
+
+        .grid {
+            margin-top: 28px;
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        }
+
+        .card {
+            border-radius: 20px;
+            background: linear-gradient(145deg, #fff 0%, #f1f8e9 100%);
+            border: 3px solid rgba(126, 207, 107, 0.5);
+            padding: 18px 16px;
+            box-shadow: 0 6px 0 rgba(92, 184, 92, 0.25);
+        }
+
+        .card h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--grass-dark);
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--text-soft);
+            line-height: 1.65;
+            font-size: 0.96rem;
+            font-weight: 600;
+        }
+
+        .animals-strip {
+            margin-top: 22px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: linear-gradient(90deg, rgba(255, 138, 101, 0.15), rgba(206, 147, 216, 0.15));
+            border: 2px dashed rgba(84, 110, 122, 0.35);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer-link {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .footer-link a {
+            color: var(--grass-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-bottom: 2px solid var(--grass);
+        }
+
+        .footer-link a:hover {
+            color: #2e7d32;
+        }
+
+        .puzzle-dots {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            opacity: 0.5;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        .puzzle-dots span {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .puzzle-dots span:nth-child(1) { background: var(--coral); top: 0; left: 0; }
+        .puzzle-dots span:nth-child(2) { background: var(--sun); top: 0; right: 0; }
+        .puzzle-dots span:nth-child(3) { background: var(--lavender); bottom: 0; left: 0; }
+        .puzzle-dots span:nth-child(4) { background: var(--grass); bottom: 0; right: 0; }
+    </style>
+</head>
+<body>
+    <div class="clouds" aria-hidden="true">
+        <div class="cloud a"></div>
+        <div class="cloud b"></div>
+    </div>
+    <main class="wrap">
+        <section class="hero">
+            <div class="puzzle-dots" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="hero-inner">
+                <div class="meta">
+                    <span class="pill">Casual puzzle</span>
+                    <span class="pill alt">Drag &amp; drop</span>
+                    <span class="pill">All ages</span>
+                </div>
+                <h1>Animal Puzzle <span class="accent">Fun World</span></h1>
+                <p class="lead">
+                    A cheerful animal puzzle adventure with colorful cartoon artwork and simple drag-and-drop gameplay. Complete matching puzzles by placing each piece in the right spot, meet friendly farm and safari friends, and enjoy bright visuals and relaxing challenges made for quick, happy play sessions on iPhone and iPad.
+                </p>
+
+                <div class="cta">
+                    <a class="btn primary" href="https://apps.apple.com/us/app/animal-puzzle-fun-world/id1549723314?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+                    <a class="btn secondary" href="privacy.html">Privacy overview</a>
+                </div>
+
+                <div class="grid">
+                    <article class="card">
+                        <h2>Easy to play</h2>
+                        <p>Pick up the basics in seconds: drag pieces, snap them into place, and watch the picture come together.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Cute animal cast</h2>
+                        <p>Discover cows, horses, goats, sheep, pigs, dogs, elephants, and more in a playful cartoon world.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Relaxing vibes</h2>
+                        <p>Friendly sounds and satisfying puzzle moments make it a cozy choice whenever you want to unwind.</p>
+                    </article>
+                </div>
+
+                <p class="animals-strip">
+                    Designed for casual players who love bright colors, gentle pacing, and happy animal themes—ideal for kids and anyone who enjoys light puzzle fun.
+                </p>
+                <p class="footer-link"><a href="privacy.html">How we handle privacy in the app</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
